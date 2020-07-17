@@ -12,7 +12,7 @@ namespace CarSimulator
             bool shouldNotExit = true;
 
             //carlist är en Array av Car. Den kan  peka på en samling av 10 stycken reference till Car.
-            Car[] carlist = new Car[10];
+            Car[] carList = new Car[10];
 
             uint carListCurrentIndexPosition = 0;
 
@@ -45,12 +45,25 @@ namespace CarSimulator
                         // inne i Car.
                         Car newCar = new Car(brand, model);                        
 
-                       carlist[carListCurrentIndexPosition++] = newCar;
+                       carList[carListCurrentIndexPosition++] = newCar;
 
                         break;
 
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
+
+                        WriteLine("Brand             Model");
+                        WriteLine("-------------------------");
+
+                        foreach (Car car in carList)
+                        {
+                            if (car == null) continue;
+
+                            WriteLine($"{car.GetBrand()}           {car.GetModel()}");
+                        }
+
+                        WriteLine(">>> Press anykey to continue");
+                        ReadKey();
 
                         break;
                     case ConsoleKey.D3:
@@ -68,5 +81,7 @@ namespace CarSimulator
                 Clear();
             }
         }
+
+        
     }
 }

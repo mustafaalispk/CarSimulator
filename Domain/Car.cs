@@ -11,5 +11,15 @@
             this.brand = brand;
             this.model = model;
         }
-    }
+
+        public string GetBrand()
+        {
+            return brand;
+        }
+        public string GetModel()
+        {
+            return model;
+        }
+
+    }    
 }
