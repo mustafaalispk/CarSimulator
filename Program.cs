@@ -31,41 +31,63 @@ namespace CarSimulator
                 {
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
+                        {
+                            Write("Brand: ");
+                            // Vi hämtar in brand, lagar reference till brand.
+                            string brand = ReadLine();
 
 
-                        Write("Brand: ");
-                        // Vi hämtar in brand, lagar reference till brand.
-                        string brand = ReadLine();
+                            Write("Model: ");
+                            string model = ReadLine();
 
 
-                        Write("Model: ");
-                        string model = ReadLine();
-                       
-                        // Här vi skickar in reference till brand, reference till model
-                        // inne i Car.
-                        Car newCar = new Car(brand, model);                        
+                            Write("Registration number: ");
+                            string registrationNumber = ReadLine();
 
-                       carList[carListCurrentIndexPosition++] = newCar;
 
-                        break;
+                            // Här vi skickar in reference till brand, reference till model
+                            // inne i Car.
+                            Car newCar = new Car(brand, model, registrationNumber);
+
+                            carList[carListCurrentIndexPosition++] = newCar;
+
+                            break;
+
+                        }
+
+                        
 
                     case ConsoleKey.D2:
                     case ConsoleKey.NumPad2:
-
-                        WriteLine("Brand             Model");
-                        WriteLine("-------------------------");
-
-                        foreach (Car car in carList)
                         {
-                            if (car == null) continue;
+                            string brandHeader = "Brand".PadRight(10, ' ');
+                            string modelHeader = "Model".PadRight(10, ' ');
+                            string registrationHeader = "Registration number";
+                            WriteLine($"{brandHeader} {modelHeader}{registrationHeader}");
 
-                            WriteLine($"{car.GetBrand()}           {car.GetModel()}");
+                            WriteLine("----------------------------------------------");
+
+                            foreach (Car car in carList)
+                            {
+                                if (car == null) continue;
+
+                                string brand = car.GetBrand().PadRight(10, ' ');
+                                string model = car.GetModel().PadRight(10, ' ');
+                                string registrationNumber = car.GetRegistrationNumber().PadLeft(10, ' ');
+
+                                Write(brand);
+                                Write(model);
+                                WriteLine(registrationNumber);
+                            }
+
+                            WriteLine("");
+                            WriteLine(">>> Press anykey to continue");
+                            ReadKey();
+
+                            break;
+
                         }
-
-                        WriteLine(">>> Press anykey to continue");
-                        ReadKey();
-
-                        break;
+                                                
                     case ConsoleKey.D3:
                     case ConsoleKey.NumPad3:
 
