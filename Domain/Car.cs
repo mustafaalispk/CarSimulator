@@ -1,4 +1,6 @@
-﻿namespace CarSimulator.Domain
+﻿using System;
+
+namespace CarSimulator.Domain
 {
     class Car
     {
@@ -11,7 +13,8 @@
         {
             this.brand = brand;
             this.model = model;
-            this.registrationNumber = registrationNumber;
+            // För att hindra mer än 6 teckan, vi anroppar samma method här i konstruktor.
+            SetRegistrationNumber(registrationNumber);            
         }
 
         public string GetBrand()
@@ -29,5 +32,17 @@
             return registrationNumber;
         }
 
+        public void SetRegistrationNumber(string newRegistrationNumber)
+        {
+            if (newRegistrationNumber.Length > 6)
+            {
+                registrationNumber = newRegistrationNumber.Substring(0, 6);
+            }
+            else
+            {
+                registrationNumber = newRegistrationNumber;
+            }
+            
+        }
     }    
 }
