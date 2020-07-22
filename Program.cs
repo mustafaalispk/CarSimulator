@@ -32,23 +32,46 @@ namespace CarSimulator
                     case ConsoleKey.D1:
                     case ConsoleKey.NumPad1:
                         {
-                            Write("Brand: ");
-                            // Vi hämtar in brand, lagar reference till brand.
-                            string brand = ReadLine();
-
-
-                            Write("Model: ");
-                            string model = ReadLine();
-
+                            // Nu behöver vi inte sätta in själv brand, model
+                            // nu vill vi välja vilken bil är den istället.
+                            // nu har vi en class som reperestera TeslaModel3, Volvo240
+                            // så ända behöver vi registration number.
 
                             Write("Registration number: ");
+
                             string registrationNumber = ReadLine();
 
+                            WriteLine("Choose Car: ");
 
-                            // Här vi skickar in reference till brand, reference till model
-                            // inne i Car.
-                            Car newCar = new Car(brand, model, registrationNumber);
+                            WriteLine("1. Tesla, Model 3");
 
+                            WriteLine("2. Volvo, 240");
+
+                            keyPressed = ReadKey(true);
+
+                            // Här har vi reference till en bil
+                            Car newCar = null;
+
+                            if (keyPressed.Key == ConsoleKey.D1)
+                            {
+                                
+                                // Här vi skickar in reference till brand, reference till model
+                                // inne i Car.
+                                // Car är föräldrar class till TeslaModel3
+
+                                newCar = new TeslaModel3(registrationNumber);
+                               
+                            }
+                            else if (keyPressed.Key == ConsoleKey.D2)
+                            {
+                   
+                                // Här vi skickar in reference till brand, reference till model
+                                // inne i Car.
+                                // Car är föräldrar class till Volvo240
+
+                                newCar = new Volvo240(registrationNumber);
+                                                                
+                            }
                             carList[carListCurrentIndexPosition++] = newCar;
 
                             break;
@@ -123,6 +146,25 @@ namespace CarSimulator
 
                     case ConsoleKey.D4:
                     case ConsoleKey.NumPad4:
+
+                        Write("Seconds: ");
+
+                        int seconds = int.Parse(ReadLine());
+
+                        Clear();
+
+                        WriteLine("Car                  Velocity (km/h)");
+                        WriteLine("-------------------------------------------");
+
+                        foreach (var car in carList)
+                        {
+                            if (car == null) continue;
+
+                            car.Accelerate(seconds);
+
+                            WriteLine($"{car.GetBrand()}, {car.GetModel()}     {car.Velocity}");
+                        }
+                        ReadKey(true);
 
                         break;
                     case ConsoleKey.D5:
